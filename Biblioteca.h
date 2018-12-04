@@ -1,3 +1,4 @@
+#include <string.h>
 #include <iostream>
 namespace std;
 
@@ -23,6 +24,7 @@ class usuario{
 		string endereco;
 		string fone;
 		usuario();
+		~usuario();
 };
 
 class publicacao{
@@ -35,20 +37,30 @@ class publicacao{
 };
 
 class itemEmprestimo{
-	public:
-				
 	private:
+				
+	public:
 		itemEmprestimo();
 };
 
 class livro{
-	public:
 	private:
+	public:
+		string autores;
+		int qtdeExemplares;
+		livro(string autoresPar, int qtdeExemplaresPar);
+		livro(int codPublicacao, string titulo, string editora, int ano, string autores, int qtdeExemplares = 0);
+		void acrescentar();
+		void decrementar();
 		
 };
 
 class periodico{
-
+	private:
+	public:
+		int numEdicao;
+		string mes;
+		periodico(int numEdicaoPar, string mesPar);
 };
 
 int main(){
