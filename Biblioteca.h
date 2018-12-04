@@ -2,32 +2,35 @@
 #include <iostream>
 namespace std;
 
-class Biblioteca{
-	public:
-	private:
-};
 
-class emprestimo: public Biblioteca{
-	private:
-		int numero;
+class emprestimo{
 		
 	public:
+		int numero;
+		Date dataEmprestimo;
+		Usuario usuario;//como criar esse objeto?
+		int proximoNumero;//como torná-lo estático?
+		emprestimo(int numero, Date dataEmprestimo, Date dataPrevDevolucao, Usuario usuario);
+		void adicionarLivro(livro nomeLivro);
+		void excluirLivro(livro nomeLivro);
+		void devolverLivro(livro nomeLivro);
+		void devolverTodosOsLivros();
 
 
 };
 
-class usuario{
+class Usuario{
 	private:
 	public:
 		string nome;
 		string cpf;
 		string endereco;
 		string fone;
-		usuario();
-		~usuario();
+		Usuario();
+		~Usuario();
 };
 
-class publicacao{
+class Publicacao{
 	private:
 	public:
 		int codPublicacao;
@@ -36,14 +39,25 @@ class publicacao{
 		int ano;
 };
 
+class Biblioteca{
+	Emprestimo emprestimo;
+	Usuario usuario;
+	Publicacao publicacao;
+	
+	public:
+		
+};
+
 class itemEmprestimo{
 	private:
 				
 	public:
-		itemEmprestimo();
+		Date dataDevolucao;
+		Livro livro;
+		itemEmprestimo(Livro Livro, Date dataDevolucao = NULL);
 };
 
-class livro{
+class Livro{
 	private:
 	public:
 		string autores;
