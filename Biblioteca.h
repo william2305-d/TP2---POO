@@ -17,9 +17,10 @@ class Date{
 		
 		Date DataNula(){ dia = 0; mes = 0; ano = 0;};  
 		Date DataCorrente(){}; //inicializa com a data do "dia" que voce usar essa função, para gente será o msm dia.
-		Date(){ }; // inicializa com a data do dia da criação
+		Date(){}; // inicializa com a data do dia da criação
 		~Date(){};
 		int operator==(Date &d); 
+		int operator<=(Date& d);
 		
 
 };
@@ -33,10 +34,11 @@ class Usuario{
 		Date dataPenalizacao;
 	public:
 	//	Usuario(Usuario &u);
+		Date& getDataPen(){ return dataPenalizacao;};
 		Usuario(){};
 		Usuario(string nome, string cpf, string endereco,string fone);
 		~Usuario(){};
-	//	int operator==(Usuario &u);
+		int operator==(const Usuario &u)const;
 };
 
 class Publicacao{
@@ -94,8 +96,7 @@ class ItemEmprestimo{
 		void setDataDev(){ dataDevolucao.DataCorrente();};
 };
 
-class Emprestimo{
-		
+class Emprestimo{		
 	private:
 		int numero;
 		Date dataEmprestimo;
@@ -110,6 +111,9 @@ class Emprestimo{
 		void excluirLivro(Livro &nomeLivro);
 		void devolverLivro(Livro &nomeLivro);
 		void devolverTodosOsLivros();
+		Usuario& getUsuario(){return usuario;};
+		Date& getDataPrevDev(){ return dataPrevDevolucao;}
+		void adcItemEmprestimo(ItemEmprestimo &i){ itens.push_back(i);};
 		
 };
 
@@ -121,7 +125,19 @@ class Erro{
 		void out(){ cout << tipo_erro << endl; };	
 			
 };
-class Biblioteca{
+class Biblioteca{		
+	private:
+		//Ao iniciar aqui já é dado como vazio (tamanho zero do vetor)
+		vector <Emprestimo> emprestimos;
+		vector <Usuario> usuarios;
+		vector <Publicacao> livros;
+	public:
+		Biblioteca(); //
+		void novoUsuario(const Usuario &u);
+		void novaPublicacao(const Publicacao &p);
+		void novoEmprestimo(const Emprestimo &e);
+		void novoItemEmprestimo(Emprestimo &e, ItemEmprestimo &i); //tambem recebe itemdeemprestimo
+		void excluiUsuario(const Usuario &u);
 		
 };
 
