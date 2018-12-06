@@ -1,7 +1,7 @@
 #include <string.h>
-#include <iostream>
 #include <time.h>
-namespace std;
+#include <vector>
+using namespace std;
 
 class Date{
 	public:
@@ -21,6 +21,7 @@ class Usuario{
 		string fone;
 		Date dataPenalizacao;
 	public:
+		Usuario(Usuario &u):nome(u.nome),cpf(u.cpf),endereco(u.endereco),fone(u.fone),dataPenalizacao(u.dataPenalizacao){};
 		Usuario(string nome, string cpf, string endereco,string fone);
 		~Usuario(){};
 };
@@ -31,7 +32,8 @@ class Publicacao{
 		string titulo;
 		string editora;
 		int ano;
-	pubic:
+	public:
+		Publicacao(Publicacao &p):codPublicacao(p.codPublicacao),titulo(p.titulo),editora(p.editora),ano(p.ano){};
 		Publicacao();
 		Publicacao(int codP, string tit, string ed, int a);
 		~Publicacao(){}; 
@@ -42,7 +44,11 @@ class Livro:public Publicacao{
 		string autores;
 		int qtdeExemplares;
 	public:
-		Livro(string aut, int codP, string tit, string ed, int a,int qtdeE = 0):autores(aut),codPublicacao(codP),titulo(tit),editora(ed),ano(a),qtdeExemplares(qtdeE){};
+		//construtor de cópia(inicializando somente as variáveis da classe Livro)
+		Livro(Livro &l):autores(l.autores),qtdeExemplares(l.qtdeExemplares){};
+	
+		//construtor inicializando todas as variáveis
+		Livro(string aut, int codP, string tit, string ed, int a,int qtdeE = 0):autores(aut),qtdeExemplares(qtdeE){};
 		~Livro(){};
 		void incrementar();
 		void decrementar();
@@ -54,12 +60,22 @@ class Periodico:public Publicacao{
 		int numEdicao;
 		string mes;
 	public:
-		Periodico(int numE, string m, int codP, string tit, string ed, int a):numeEdicao(numE), mes(m), codPublicacao(codP),titulo(tit),editora(ed),ano(a){};
+		//construtor de cópia(inicializando somente as variáveis da classe Periodico)
+		Periodico(Periodico &p):numEdicao(p.numEdicao),mes(p.mes){};
+		Periodico(int numE, string m, int codP, string tit, string ed, int a):numEdicao(numE), mes(m){};
 		~Periodico(){};
 };
 
+class ItemEmprestimo{
+	private:
+				
+	public:
+		Date dataDevolucao;
+		Livro livro;
+		ItemEmprestimo(Livro Livro, Date dataDevolucao);
+};
 
-class emprestimo{
+class Emprestimo{
 		
 	private:
 		int numero;
@@ -73,7 +89,7 @@ class emprestimo{
 		void excluirLivro(Livro nomeLivro);
 		void devolverLivro(Livro nomeLivro);
 		void devolverTodosOsLivros();
-		emprestimo(int num, Date dataE, Usuario usu, Date dataPrevDev);
+		Emprestimo(int num, Date dataE, Usuario usu, Date dataPrevDev);
 
 
 
@@ -88,16 +104,3 @@ class Biblioteca{
 		
 };
 
-class itemEmprestimo{
-	private:
-				
-	public:
-		Date dataDevolucao;
-		Livro livro;
-		itemEmprestimo(Livro Livro, Date dataDevolucao = NULL);
-};
-
-int main(){
-
-	return 0;
-}
