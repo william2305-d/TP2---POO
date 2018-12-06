@@ -33,6 +33,10 @@ class Publicacao{
 		string editora;
 		int ano;
 	public:
+		void setCodPublicacao(int codPPar);
+		void setTitulo(string titPar);
+		void setEditora(string edPar);
+		void setAno(int anoPar);
 		Publicacao(Publicacao &p):codPublicacao(p.codPublicacao),titulo(p.titulo),editora(p.editora),ano(p.ano){};
 		Publicacao();
 		Publicacao(int codP, string tit, string ed, int a);
@@ -48,7 +52,7 @@ class Livro:public Publicacao{
 		Livro(Livro &l):autores(l.autores),qtdeExemplares(l.qtdeExemplares){};
 	
 		//construtor inicializando todas as variáveis
-		Livro(string aut, int codP, string tit, string ed, int a,int qtdeE = 0):autores(aut),qtdeExemplares(qtdeE){};
+		Livro(string aut, int codP, string tit, string ed, int a,int qtdeE = 0);
 		~Livro(){};
 		void incrementar();
 		void decrementar();

@@ -4,7 +4,15 @@
 #include "Biblioteca.h"
 using namespace std;
 
-int main(){
+void Publicacao::setCodPublicacao(int codPublicacao){
+	
+}
 
-	return 0;
+Livro::Livro(string aut, int codP, string tit, string ed, int a,int qtdeE){
+	autores = aut;
+	qtdeExemplares = qtdeE;
+	setCodPublicacao(codP);
+	setTitulo(tit);
+	setEditora(ed);
+	setAno(a);
 }
