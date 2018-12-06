@@ -15,10 +15,12 @@ class Date{
 		//Exemplo =>  Date DataNula();
 		//Acho que terá q fazer um contrutor por copia em todos!!!
 		
-		Date DataNula(){};        //William tem q implemetar
-		Date DataCorrente(){};
-		Date(){};
+		Date DataNula(){ dia = 0; mes = 0; ano = 0;};  
+		Date DataCorrente(){}; //inicializa com a data do "dia" que voce usar essa função, para gente será o msm dia.
+		Date(){ }; // inicializa com a data do dia da criação
 		~Date(){};
+		int operator==(Date &d); 
+		
 
 };
 
@@ -30,9 +32,11 @@ class Usuario{
 		string fone;
 		Date dataPenalizacao;
 	public:
+	//	Usuario(Usuario &u);
 		Usuario(){};
 		Usuario(string nome, string cpf, string endereco,string fone);
 		~Usuario(){};
+	//	int operator==(Usuario &u);
 };
 
 class Publicacao{
@@ -42,9 +46,13 @@ class Publicacao{
 		string editora;
 		int ano;
 	public:
+	//	Publicacao(Publicacao &p);
+	//	int operator==(Publicacao &p);
+		string getTitulo()const{return titulo;};
 		Publicacao(){};
 		Publicacao(int codP, string tit, string ed, int a);
 		~Publicacao(){}; 
+		
 		
 };
 
@@ -53,11 +61,13 @@ class Livro: public Publicacao{
 		string autores;
 		int qtdeExemplares;
 	public:
-		Livro(){};
+	//	Livro(Livro& l);
+	//	Livro operator=(Livro &l);
+		Livro(){}; 
 		Livro(string aut, int codP, string tit, string ed, int a,int qtdeE = 0):Publicacao( codP, tit, ed, a),autores(aut),qtdeExemplares(qtdeE){};
 		~Livro(){};
 		void incrementar(){};
-		void decrementar(){}; //Fazer o teste se pode decrementar
+		void decrementar(){}; //Fazer o teste se pode decrementar (se qtdeExemplares é maior que zero)
 		int operator==(const Livro &l)const;
 		
 };
@@ -77,9 +87,11 @@ class ItemEmprestimo{
 		Date dataDevolucao;
 		Livro livro;	
 	public:
+		Date getDataDev(){return dataDevolucao;	};
 		ItemEmprestimo(){};
 		ItemEmprestimo(Livro l);
 		Livro getLivro();
+		void setDataDev(){ dataDevolucao.DataCorrente();};
 };
 
 class Emprestimo{
@@ -94,16 +106,21 @@ class Emprestimo{
 	public:
 		Emprestimo(){};
 		Emprestimo(Usuario usu, Date dataPrevDev);
-		void adicionarLivro(Livro nomeLivro);
-		void excluirLivro(Livro nomeLivro);
-		void devolverLivro(Livro nomeLivro);
+		void adicionarLivro(Livro &nomeLivro);
+		void excluirLivro(Livro &nomeLivro);
+		void devolverLivro(Livro &nomeLivro);
 		void devolverTodosOsLivros();
 		
-
-
-
 };
 
+class Erro{
+	private:
+		string tipo_erro;
+	public:
+		Erro(const string &a):tipo_erro(a){};
+		void out(){ cout << tipo_erro << endl; };	
+			
+};
 class Biblioteca{
 		
 };
