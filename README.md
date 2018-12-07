@@ -1,10 +1,8 @@
 # TP2---POO
 Trabalho Prático de POO
 
-Manu -> 
+Manu:
+- Excluir, primeiro pesquisar
 William:
-- Classe Date(OK)
-- Publicacao(OK)
-- Livro(OK)
-- Periodico(OK)
-- Usuario(OK)
+- Devolver, segundo pesquisar, metodos de listas
+ 
