@@ -2,4 +2,9 @@
 Trabalho Prático de POO
 
 Manu -> 
-William -> Classe Date, Publicacao, Livro e Periodico, Usuario.
+William:
+- Classe Date(OK)
+- Publicacao(OK)
+- Livro(OK)
+- Periodico
+- Usuario.
