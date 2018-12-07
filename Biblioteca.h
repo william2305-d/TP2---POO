@@ -6,6 +6,7 @@ using namespace std;
 
 // --------------------------------------------------------------------    DATE   --------------------------------------------------------------------//
 
+//Dia nao pode ser digitado com 0 antes ex:(06 -> errado, 6 -> certo)
 //Arrumar para inicializar com a data corrente do sistema
 class Date{
 		int dia;
@@ -20,11 +21,13 @@ class Date{
 		void DataNula(){ dia = 0; mes = 0; ano = 0;};  
 		void DataCorrente(); //inicializa com a data do "dia" que voce usar essa função, para gente será o msm dia.
 		Date(); // inicializa com a data do dia da criação
+		Date(int d, int m, int a):dia(d), mes(m), ano(a){};
 		~Date(){};
 		int getDia(){return dia;};
 		int getMes(){return mes;};
 		int getAno(){return ano;};
-		int operator==(Date &d); 
+		int operator==(Date &d);
+		int operator<(Date &d);  
 		
 
 };

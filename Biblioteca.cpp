@@ -15,6 +15,23 @@ int Date::operator==(Date &d){
 	return false;
 };
 
+int Date::operator<(Date &d){
+	if(ano < d.ano){
+		return true;
+	}	
+	else if (ano == d.ano){
+		if(mes < d.mes){
+			return true;
+		}
+		else if(mes == d.mes){
+			if(dia < d.dia){
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
 void Date::DataCorrente(){
   time_t rawtime;
   struct tm * timeinfo;
