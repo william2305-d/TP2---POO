@@ -1,15 +1,29 @@
 #include <string.h>
+#include <iostream>
 #include <time.h>
-#include <vector>
+#include<vector>
 using namespace std;
 
+//Arrumar para inicializar com a data corrente do sistema
 class Date{
-	public:
 		int dia;
 		int mes;
 		int ano;
-		Date();
+	public:
+		//Obs: O certo È tirar daqui as {} depois de implementar em todas as funÁıes
+		//De menos das contrutores que n recebem nada
+		//Exemplo =>  Date DataNula();
+		//Acho que ter· q fazer um contrutor por copia em todos!!!
+		
+		void DataNula(){ dia = 0; mes = 0; ano = 0;};  
+		void DataCorrente(); //inicializa com a data do "dia" que voce usar essa funÁ„o, para gente ser· o msm dia.
+		Date(); // inicializa com a data do dia da criaÁ„o
 		~Date(){};
+		int getDia();
+		int getMes();
+		int getAno();
+		int operator==(Date &d); 
+		
 
 };
 
@@ -21,9 +35,11 @@ class Usuario{
 		string fone;
 		Date dataPenalizacao;
 	public:
-		Usuario(Usuario &u):nome(u.nome),cpf(u.cpf),endereco(u.endereco),fone(u.fone),dataPenalizacao(u.dataPenalizacao){};
+	//	Usuario(Usuario &u);
+		Usuario(){};
 		Usuario(string nome, string cpf, string endereco,string fone);
 		~Usuario(){};
+		int operator==(const Usuario &u)const;
 };
 
 class Publicacao{
@@ -33,29 +49,29 @@ class Publicacao{
 		string editora;
 		int ano;
 	public:
-		void setCodPublicacao(int codPPar);
-		void setTitulo(string titPar);
-		void setEditora(string edPar);
-		void setAno(int anoPar);
-		Publicacao(Publicacao &p):codPublicacao(p.codPublicacao),titulo(p.titulo),editora(p.editora),ano(p.ano){};
-		Publicacao();
+	//	Publicacao(Publicacao &p);
+	//	int operator==(Publicacao &p);
+		string getTitulo()const{return titulo;};
+		Publicacao(){};
 		Publicacao(int codP, string tit, string ed, int a);
 		~Publicacao(){}; 
+		
+		
 };
 
-class Livro:public Publicacao{
+class Livro: public Publicacao{
 	private:
 		string autores;
 		int qtdeExemplares;
 	public:
-		//construtor de c√≥pia(inicializando somente as vari√°veis da classe Livro)
-		Livro(Livro &l):autores(l.autores),qtdeExemplares(l.qtdeExemplares){};
-	
-		//construtor inicializando todas as vari√°veis
-		Livro(string aut, int codP, string tit, string ed, int a,int qtdeE = 0);
+	//	Livro(Livro& l);
+	//	Livro operator=(Livro &l);
+		Livro(){}; 
+		Livro(string aut, int codP, string tit, string ed, int a,int qtdeE = 0):Publicacao( codP, tit, ed, a),autores(aut),qtdeExemplares(qtdeE){};
 		~Livro(){};
-		void incrementar();
-		void decrementar();
+		void incrementar(){};
+		void decrementar(){}; //Fazer o teste se pode decrementar (se qtdeExemplares È maior que zero)
+		int operator==(const Livro &l)const;
 		
 };
 
@@ -64,47 +80,63 @@ class Periodico:public Publicacao{
 		int numEdicao;
 		string mes;
 	public:
-		//construtor de c√≥pia(inicializando somente as vari√°veis da classe Periodico)
-		Periodico(Periodico &p):numEdicao(p.numEdicao),mes(p.mes){};
-		Periodico(int numE, string m, int codP, string tit, string ed, int a):numEdicao(numE), mes(m){};
+		
+		Periodico(int numE, string m, int codP, string tit, string ed, int a):Publicacao( codP, tit, ed, a),numEdicao(numE),mes(m){};
 		~Periodico(){};
 };
 
 class ItemEmprestimo{
 	private:
-				
-	public:
 		Date dataDevolucao;
-		Livro livro;
-		ItemEmprestimo(Livro Livro, Date dataDevolucao);
+		Livro livro;	
+	public:
+		Date getDataDev(){return dataDevolucao;	};
+		ItemEmprestimo(){};
+		ItemEmprestimo(Livro l);
+		Livro getLivro();
+		void setDataDev(){ dataDevolucao.DataCorrente();};
 };
 
-class Emprestimo{
-		
+class Emprestimo{		
 	private:
 		int numero;
 		Date dataEmprestimo;
 		Usuario usuario;
-		int proximoNumero;
+		static int proximoNumero;
 		Date dataPrevDevolucao;
 		vector <ItemEmprestimo> itens;
 	public:
-		void adicionarLivro(Livro nomeLivro);
-		void excluirLivro(Livro nomeLivro);
-		void devolverLivro(Livro nomeLivro);
+		Emprestimo(){};
+		Emprestimo(Usuario usu, Date dataPrevDev);
+		void adicionarLivro(Livro &nomeLivro);
+		void excluirLivro(Livro &nomeLivro);
+		void devolverLivro(Livro &nomeLivro);
 		void devolverTodosOsLivros();
-		Emprestimo(int num, Date dataE, Usuario usu, Date dataPrevDev);
-
-
-
-};
-
-class Biblioteca{
-	Emprestimo emprestimo;
-	Usuario usuario;
-	Publicacao publicacao;
-	
-	public:
+		Usuario& getUsuario(){return usuario;};
+		void adcItemEmprestimo(ItemEmprestimo &i){ itens.push_back(i);};
 		
 };
 
+class Erro{
+	private:
+		string tipo_erro;
+	public:
+		Erro(const string &a):tipo_erro(a){};
+		void out(){ cout << tipo_erro << endl; };	
+			
+};
+class Biblioteca{		
+	private:
+		//Ao iniciar aqui j· È dado como vazio (tamanho zero do vetor)
+		vector <Emprestimo> emprestimos;
+		vector <Usuario> usuarios;
+		vector <Publicacao> livros;
+	public:
+		Biblioteca(); //
+		void novoUsuario(const Usuario &u);
+		void novaPublicacao(const Publicacao &p);
+		void novoEmprestimo(const Emprestimo &e);
+		void novoItemEmprestimo(Emprestimo &e, ItemEmprestimo &i); //tambem recebe itemdeemprestimo
+		void excluiUsuario(const Usuario &u);
+		int verificaUsuarioEmp(Usuario &u);
+};
