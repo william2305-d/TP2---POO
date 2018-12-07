@@ -6,5 +6,5 @@ William:
 - Classe Date(OK)
 - Publicacao(OK)
 - Livro(OK)
-- Periodico
+- Periodico(OK)
 - Usuario.
