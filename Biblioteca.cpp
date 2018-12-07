@@ -27,7 +27,6 @@ void Date::DataCorrente(){
   timeinfo = localtime ( &rawtime );
   data = asctime (timeinfo);
   
-  cout << data << endl;
   m = data.substr(4,3);
   d = data.substr(8,2);
   a = data.substr(20,4);
@@ -95,24 +94,8 @@ void Date::DataCorrente(){
   ano = atoi( a.c_str() );
 }
 
-int Date::getDia(){
-	return dia;
-}
-
-int Date::getMes(){
-	return mes;
-}
-
-int Date::getAno(){
-	return ano;
-}
-
 Date::Date(){
-	Date data;
-	data.DataCorrente();
-	dia = data.getDia();
-	mes = data.getMes();
-	ano = data.getAno();
+	DataCorrente();
 }
 
 
@@ -125,16 +108,60 @@ int Usuario::operator==(const Usuario &u)const{
 	return false;
 }
 
+Usuario::Usuario(string nomeParametro, string cpfParametro, string enderecoParametro, string foneParametro){
+	nome = nomeParametro;
+	cpf = cpfParametro;
+	endereco = enderecoParametro;
+	fone = foneParametro;
+}
+
+// --------------------------------------------------------------------    PUBLICACAO   --------------------------------------------------------------------//
+
+int Publicacao::operator==(Publicacao &p){
+	if(p.ano == ano && p.codPublicacao == codPublicacao && (editora.compare(p.editora) == 0 ) && (titulo.compare(p.titulo) == 0)){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
 // --------------------------------------------------------------------    LIVRO   --------------------------------------------------------------------//
 
 //Esta errado so fiz pr testar, falta testar se as outras variaveis sao iguais
 //Observação importante para o Will (necessario fazer um get para todos os atributos) 
 int Livro::operator==(const Livro &l)const{
-	if (this->getTitulo() == l.getTitulo()){
+	if (autores == l.autores && getCodPublicacao() == l.getCodPublicacao() && this->getTitulo() == l.getTitulo() && getEditora() == l.getEditora() && getAno() == l.getAno() && qtdeExemplares == l.qtdeExemplares ){
 		return true;
 	} 
-	return false;
+	else{
+		return false;	
+	}
+}
 
+void Livro::incrementar(){
+	qtdeExemplares++;
+}
+
+void Livro::decrementar(){
+	if(qtdeExemplares <= 0){
+		cout << "quantidade de exemplares igual a 0, impossivel decrementar" << endl;
+	}
+	else{
+		qtdeExemplares--;
+	}
+}
+
+// ---------------------------------------------------------------------    PERIODICO   ---------------------------------------------------------------------//
+
+int Periodico::operator==(const Periodico &p)const{
+	// comparar só as variáveis de periodico ou da classe base tbm?
+	if(numEdicao == p.numEdicao && mes == p.mes && this->getCodPublicacao() == p.getCodPublicacao() && getTitulo() == p.getTitulo() && getEditora() == p. getEditora() && getAno() == p.getAno()){
+		return true;
+	}
+	else{
+		return false;
+	}
 }
 
 // ------------------------------------------------------------------    ITEM EMPRESTIMO   ------------------------------------------------------------------//

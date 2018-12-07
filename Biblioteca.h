@@ -4,6 +4,8 @@
 #include<vector>
 using namespace std;
 
+// --------------------------------------------------------------------    DATE   --------------------------------------------------------------------//
+
 //Arrumar para inicializar com a data corrente do sistema
 class Date{
 		int dia;
@@ -19,13 +21,15 @@ class Date{
 		void DataCorrente(); //inicializa com a data do "dia" que voce usar essa função, para gente será o msm dia.
 		Date(); // inicializa com a data do dia da criação
 		~Date(){};
-		int getDia();
-		int getMes();
-		int getAno();
+		int getDia(){return dia;};
+		int getMes(){return mes;};
+		int getAno(){return ano;};
 		int operator==(Date &d); 
 		
 
 };
+
+// --------------------------------------------------------------------    USUARIO   --------------------------------------------------------------------//
 
 class Usuario{
 	private:
@@ -37,10 +41,13 @@ class Usuario{
 	public:
 	//	Usuario(Usuario &u);
 		Usuario(){};
-		Usuario(string nome, string cpf, string endereco,string fone);
+		Usuario(string nomeParametro, string cpfParametro, string enderecoParametro, string foneParametro);
 		~Usuario(){};
+		Date& getDataPenalizacao(){return dataPenalizacao;};
 		int operator==(const Usuario &u)const;
 };
+
+// --------------------------------------------------------------------    PUBLICACAO   --------------------------------------------------------------------//
 
 class Publicacao{
 	private:
@@ -50,14 +57,17 @@ class Publicacao{
 		int ano;
 	public:
 	//	Publicacao(Publicacao &p);
-	//	int operator==(Publicacao &p);
+		int operator==(Publicacao &p);
 		string getTitulo()const{return titulo;};
-		Publicacao(){};
-		Publicacao(int codP, string tit, string ed, int a);
-		~Publicacao(){}; 
-		
-		
+		string getEditora()const{return editora;};
+		int getCodPublicacao()const{return codPublicacao;};
+		int getAno()const{return ano;};
+		Publicacao(){codPublicacao = 0; titulo = " "; editora = " "; ano = 0;};
+		Publicacao(int codP, string tit, string ed, int a): codPublicacao(codP), titulo(tit), editora(ed), ano(a){};
+		~Publicacao(){}; 	
 };
+
+// --------------------------------------------------------------------    LIVRO   --------------------------------------------------------------------//
 
 class Livro: public Publicacao{
 	private:
@@ -69,21 +79,27 @@ class Livro: public Publicacao{
 		Livro(){}; 
 		Livro(string aut, int codP, string tit, string ed, int a,int qtdeE = 0):Publicacao( codP, tit, ed, a),autores(aut),qtdeExemplares(qtdeE){};
 		~Livro(){};
-		void incrementar(){};
-		void decrementar(){}; //Fazer o teste se pode decrementar (se qtdeExemplares é maior que zero)
+		void incrementar();
+		void decrementar();
+		int getQtdeExemplares(){return qtdeExemplares;};
+		string getAutores(){return autores;};
 		int operator==(const Livro &l)const;
 		
 };
+
+// ---------------------------------------------------------------------    PERIODICO   ---------------------------------------------------------------------//
 
 class Periodico:public Publicacao{
 	private:
 		int numEdicao;
 		string mes;
 	public:
-		
 		Periodico(int numE, string m, int codP, string tit, string ed, int a):Publicacao( codP, tit, ed, a),numEdicao(numE),mes(m){};
 		~Periodico(){};
+		int operator==(const Periodico &p)const;
 };
+
+// ------------------------------------------------------------------    ITEM EMPRESTIMO   ------------------------------------------------------------------//
 
 class ItemEmprestimo{
 	private:
@@ -96,6 +112,8 @@ class ItemEmprestimo{
 		Livro getLivro();
 		void setDataDev(){ dataDevolucao.DataCorrente();};
 };
+
+// --------------------------------------------------------------------    EMPRESTIMO   --------------------------------------------------------------------//
 
 class Emprestimo{		
 	private:
@@ -125,6 +143,9 @@ class Erro{
 		void out(){ cout << tipo_erro << endl; };	
 			
 };
+
+// --------------------------------------------------------------------    BIBLIOTECA   --------------------------------------------------------------------//
+
 class Biblioteca{		
 	private:
 		//Ao iniciar aqui já é dado como vazio (tamanho zero do vetor)
