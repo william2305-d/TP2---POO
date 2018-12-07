@@ -7,4 +7,4 @@ William:
 - Publicacao(OK)
 - Livro(OK)
 - Periodico(OK)
-- Usuario.
+- Usuario(OK)
