@@ -79,7 +79,7 @@ class Livro: public Publicacao{
 	public:
 	//	Livro(Livro& l);
 	//	Livro operator=(Livro &l);
-		Livro(){}; 
+		Livro():Publicacao(){autores = ""; qtdeExemplares = 0;}; 
 		Livro(string aut, int codP, string tit, string ed, int a,int qtdeE = 0):Publicacao( codP, tit, ed, a),autores(aut),qtdeExemplares(qtdeE){};
 		~Livro(){};
 		void incrementar();
@@ -162,5 +162,6 @@ class Biblioteca{
 		void novoEmprestimo(const Emprestimo &e);
 		void novoItemEmprestimo(Emprestimo &e, ItemEmprestimo &i); //tambem recebe itemdeemprestimo
 		void excluiUsuario(const Usuario &u);
+		void excluiPublicacao(const Publicacao &p);
 		int verificaUsuarioEmp(Usuario &u);
 };

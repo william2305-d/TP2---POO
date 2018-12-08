@@ -333,3 +333,20 @@ int Biblioteca::verificaUsuarioEmp(Usuario &u){
 	
 	return false;
 }
+
+void Biblioteca::excluiPublicacao(const Publicacao &p){
+	int qtdePublicacoes = livros.size();
+	cout << qtdePublicacoes << endl;
+	
+	int j = livros.at(0);
+	cout << j << endl;
+	
+	
+	for(int i = 0; i < qtdePublicacoes; i++){
+		if(livros[i].getCodPublicacao() == p.getCodPublicacao()){
+			livros.erase(livros.begin());	
+		}
+	}
+	qtdePublicacoes = livros.size();
+	cout << qtdePublicacoes << endl;
+}
