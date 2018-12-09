@@ -46,6 +46,7 @@ class Usuario{
 		Usuario(){};
 		Usuario(string nomeParametro, string cpfParametro, string enderecoParametro, string foneParametro);
 		~Usuario(){};
+		string getNome(){return nome;};//modificação feita
 		Date& getDataPenalizacao(){return dataPenalizacao;};
 		int operator==(const Usuario &u)const;
 };
@@ -163,9 +164,13 @@ class Biblioteca{
 		void novoEmprestimo(const Emprestimo &e);
 		void novoItemEmprestimo(Emprestimo &e, ItemEmprestimo &i); //tambem recebe itemdeemprestimo
 		void excluiUsuario(const Usuario &u);
-		//void excluiPublicacao(const Publicacao &p);
-		//void excluiEmprestimo(const Emprestimo &);
-		vector 
+		void excluiPublicacao(const Publicacao &p);
+		void excluiEmprestimo(const Emprestimo &);
+		vector <Usuario> getListaUsuario(){return usuarios;};
+		vector <Publicacao> getPublicacoes(){return livros;};
+		vector <Emprestimo> getEmprestimos(){return emprestimos;};
 		int verificaUsuarioEmp(Usuario &u);
+		void gravaArquivo(){};
+		void leArquivo(){};
 		
 };

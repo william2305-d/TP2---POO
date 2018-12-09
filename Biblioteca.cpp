@@ -348,7 +348,7 @@ void Biblioteca::excluiPublicacao(const Publicacao &p){
 	}
 }
 
-void Biblioteca::excluiEmprestimo(const Emprestimo &e){
+/*void Biblioteca::excluiEmprestimo(const Emprestimo &e){
 	int qtdeEmprestimos = emprestimos.size();
 	
 	for(int i = 0; i < qtdeEmprestimos; i++){
@@ -356,4 +356,7 @@ void Biblioteca::excluiEmprestimo(const Emprestimo &e){
 			livros.erase(livros.begin()+i);	
 		}
 	}
-}
+}*/
+
+
+
