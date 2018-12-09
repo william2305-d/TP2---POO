@@ -135,6 +135,7 @@ class Emprestimo{
 		void devolverTodosOsLivros();
 		Usuario& getUsuario(){return usuario;};
 		void adcItemEmprestimo(ItemEmprestimo &i){ itens.push_back(i);};
+		int operator==(const Emprestimo &e)const;
 		
 };
 
@@ -162,6 +163,9 @@ class Biblioteca{
 		void novoEmprestimo(const Emprestimo &e);
 		void novoItemEmprestimo(Emprestimo &e, ItemEmprestimo &i); //tambem recebe itemdeemprestimo
 		void excluiUsuario(const Usuario &u);
-		void excluiPublicacao(const Publicacao &p);
+		//void excluiPublicacao(const Publicacao &p);
+		//void excluiEmprestimo(const Emprestimo &);
+		vector 
 		int verificaUsuarioEmp(Usuario &u);
+		
 };

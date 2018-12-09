@@ -270,6 +270,10 @@ void Emprestimo::devolverTodosOsLivros(){
 	
 }
 
+int Emprestimo::operator==(const Emprestimo &e)const{
+	
+}
+
 // --------------------------------------------------------------------    BIBLIOTECA   --------------------------------------------------------------------//
 
 //Construtor para inicializar as listas
@@ -336,17 +340,20 @@ int Biblioteca::verificaUsuarioEmp(Usuario &u){
 
 void Biblioteca::excluiPublicacao(const Publicacao &p){
 	int qtdePublicacoes = livros.size();
-	cout << qtdePublicacoes << endl;
-	
-	int j = livros.at(0);
-	cout << j << endl;
-	
-	
+		
 	for(int i = 0; i < qtdePublicacoes; i++){
 		if(livros[i].getCodPublicacao() == p.getCodPublicacao()){
-			livros.erase(livros.begin());	
+			livros.erase(livros.begin()+i);	
 		}
 	}
-	qtdePublicacoes = livros.size();
-	cout << qtdePublicacoes << endl;
+}
+
+void Biblioteca::excluiEmprestimo(const Emprestimo &e){
+	int qtdeEmprestimos = emprestimos.size();
+	
+	for(int i = 0; i < qtdeEmprestimos; i++){
+		if(emprestimos[i].){
+			livros.erase(livros.begin()+i);	
+		}
+	}
 }
