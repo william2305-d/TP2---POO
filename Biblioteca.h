@@ -174,7 +174,7 @@ class Biblioteca{
 		void exluiItemEmprestimo(Emprestimo &e, ItemEmprestimo &it);
 		void devolverLivro(Emprestimo &e, Livro &l);
 		void devolverTodosLivros(Emprestimo &e);
-		vector <Publicacao*>& pesquisaPub(string &a);
-		
+		void pesquisaPub(string &a, vector<Publicacao*>& livrosAchados);
+		void pesquisaAutores(string &a, vector<Livro*>& livrosAchados);
 };
 

@@ -7,16 +7,6 @@
 
 using namespace std;
 
-
-//BIBLIOTECA
-
-
-
-
-
-
-
-
 // --------------------------------------------------------------------    DATE   --------------------------------------------------------------------// 
 int Date::operator==(Date &d){ 
 	if( mes == d.mes && ano == d.ano && mes == d.mes){
@@ -471,9 +461,38 @@ void Biblioteca::devolverTodosLivros(Emprestimo &e){
 	}
 }
 
-vector <Publicacao*>& Biblioteca::pesquisaPub(string &a){
-	
+void Biblioteca::pesquisaPub(string &a, vector<Publicacao*>& livrosAchados){
+//	vector <Publicacao>* livrosAchados; Não consegui como retorno!
+	int size = livrosAchados.size();  //Guarda tamanho inicial
+	for(int i =0 ; i < livros.size(); i++){
+		string titulo = livros[i]->getTitulo();
+		if(titulo.find(a) != -1){
+			livrosAchados.push_back(livros[i]);
+		}
+	}
+	if(livrosAchados.size() == size){ //Se o tamanho inicial for o msm que o final
+		throw Erro("Livro nao encontrado na Biblioteca");
+	}
+
 }
+
+void Biblioteca::pesquisaAutores(string &a, vector<Livro*>& livrosAchados){
+	int size = livrosAchados.size();  //Guarda tamanho inicial
+	for(int i =0 ; i < livros.size(); i++){
+		Livro* l = dynamic_cast<Livro*>(livros[i]);
+		if(l != NULL){ //Apenas se for um livro
+			string titulo = l->getAutores();
+			if(titulo.find(a) != -1){
+				livrosAchados.push_back(l);
+			}
+		}
+	}
+	if(livrosAchados.size() == size){ //Se o tamanho inicial for o msm que o final
+		throw Erro("Livro nao encontrado na Biblioteca");
+	}
+
+}
+
 
 
 

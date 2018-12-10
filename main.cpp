@@ -34,18 +34,19 @@ void g(tentativa& t){
 
 int main(int argc, char** argv) {
 
+
 try{
 	Usuario  a("Alice","cpf","end","21");
 	Date hoje;
 	
 	
 	Livro livro("amor",2,"t1","ed",2010,1);
-	Livro livro2("iiib",2,"t2","ed",2010,1);
+	Livro livro2("iiib",2,"t1","ed",2010,1);
  	
  	ItemEmprestimo i(livro2);
  	
-	Publicacao pub(2,"t2","ed",2010);
-
+	Publicacao pub(2,"t2 e t1","ed",2010);
+	string t("i");
 	Biblioteca b;
 
 	Emprestimo e(a,hoje), g(a,hoje);
@@ -57,32 +58,21 @@ try{
 	b.novaPublicacao(&livro);
 	vector <ItemEmprestimo> lista;
 	
-	lista = e.getItens();
-	//Casting de c 
 	
-	for (int i = 0; i < lista.size(); i++){
-		//	Livro* l = dynamic_cast <Livro*> (lista[i]); 
-		//	if(l != NULL){
-			Livro tit;
-			tit = lista[i].getLivro();	
-			cout << tit.getAutores() << endl;
-				if(tit == livro2){
-				cout << "igual"<< endl;
-			}
-	//	}
-	}
 	
-	b.novoEmprestimo(e);
-	e.adcItemEmprestimo(i);
+	vector <Livro*> livrosAchados;
 	
-	b.excluiPublicacao(&livro2);
-
-	b.exluiEmprestimo(g);
+	b.pesquisaAutores(t, livrosAchados);
+	
+	cout << livrosAchados.size() << endl;
+	cout << livrosAchados[0]->getAutores() << endl;
 	
 }catch(Erro &e){
 	e.out();
 }
 	
+	
+
 	
 		
 	return 0;
