@@ -2,7 +2,8 @@
 #include <iostream>
 #include <time.h>
 #include <vector>
-#include <Biblioteca.h>;
+#include "Biblioteca.h";
+using namespace std;
 
 class Interface {
 	public:
@@ -21,10 +22,10 @@ class Interface {
 		static void DevolverEmprestimo (Biblioteca &biblio);
 		static void DevolverLivroEmprestimo (Biblioteca &biblio);
 		
-		static void PesquisarPublicacao (Biblioteca &biblio);
-		static void PesquisarLivro (Biblioteca &biblio);
+		static void PesquisarPublicacao (Biblioteca &biblio) const;
+		static void PesquisarLivro (Biblioteca &biblio) const;
 		
-		static void ListarUsuario (Biblioteca &biblio);
-		static void ListarPublicacao (Biblioteca &biblio);
-		static void ListarEmprestimos (Biblioteca &biblio);
+		static void ListarUsuario (Biblioteca &biblio) const;
+		static void ListarPublicacao (Biblioteca &biblio) const;
+		static void ListarEmprestimos (Biblioteca &biblio) const;
 };
