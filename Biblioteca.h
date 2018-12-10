@@ -2,6 +2,9 @@
 #include <iostream>
 #include <time.h>
 #include<vector>
+#include <fstream>
+#include <string>
+#include <sstream>
 using namespace std;
 
 // --------------------------------------------------------------------    DATE   --------------------------------------------------------------------//
@@ -46,7 +49,10 @@ class Usuario{
 		Usuario(){};
 		Usuario(string nomeParametro, string cpfParametro, string enderecoParametro, string foneParametro);
 		~Usuario(){};
-		string getNome(){return nome;};//modificação feita
+		string getNome(){return nome;};
+		string getCPF(){return cpf;};
+		string getEndereco(){return endereco;};
+		string getFone(){return fone;};
 		Date& getDataPenalizacao(){return dataPenalizacao;};
 		int operator==(const Usuario &u)const;
 };
@@ -134,7 +140,12 @@ class Emprestimo{
 		void excluirLivro(Livro &nomeLivro);
 		void devolverLivro(Livro &nomeLivro);
 		void devolverTodosOsLivros();
+		int getNumero(){return numero;};
+		static int getProximoNumero(){return proximoNumero;};
+		Date getDataPrevDevolucao(){return dataPrevDevolucao;};
+		Date getDataEmprestimo(){return dataEmprestimo;};
 		Usuario& getUsuario(){return usuario;};
+		vector <ItemEmprestimo> getItens(){return itens;};
 		void adcItemEmprestimo(ItemEmprestimo &i){ itens.push_back(i);};
 		int operator==(const Emprestimo &e)const;
 		
@@ -170,7 +181,6 @@ class Biblioteca{
 		vector <Publicacao> getPublicacoes(){return livros;};
 		vector <Emprestimo> getEmprestimos(){return emprestimos;};
 		int verificaUsuarioEmp(Usuario &u);
-		void gravaArquivo(){};
-		void leArquivo(){};
-		
+		void gravaArquivo();
+		void leArquivo();
 };

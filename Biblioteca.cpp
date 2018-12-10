@@ -2,8 +2,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
-#include <string.h>
+#include <string>
 #include "Biblioteca.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -358,5 +361,64 @@ void Biblioteca::excluiPublicacao(const Publicacao &p){
 	}
 }*/
 
+void Biblioteca::gravaArquivo(){
+	
+	ofstream arquivo("teste.txt");
+	if(!arquivo){
+		throw Erro("Não foi possível abrir o arquivo");
+	}
+	
+	//imprimindo o vetor do tipo Usuario
+	for(int i = 0; i < usuarios.size(); i++){
+		arquivo << "Usuario ";
+		arquivo << i + 1;
+		arquivo << ":\n";
+		arquivo << "Nome:";
+		arquivo << usuarios[i].getNome();
+		arquivo << "\nCPF:";
+		arquivo << usuarios[i].getCPF();
+		arquivo << "\nEndereço:";
+		arquivo << usuarios[i].getEndereco();
+		arquivo << "\nFone:";
+		arquivo << usuarios[i].getFone();
+		arquivo << "\n\n";
+	}
+	
+}
 
+void Biblioteca::leArquivo(){
+	string line;
+	ifstream arquivo("teste.txt");
+	if(!arquivo){
+		throw Erro("Não foi possível abrir o arquivo");
+	}
+	
+	string nome,cpf,fone,endereco,data,dia,mes,ano;
+	int a,m,d;
+	
+	int i = 0;
+	while(!arquivo.eof()){
+		getline(arquivo,line);
+		if(i == 1){
+			nome = line.substr(5);
+		}
+		if(i == 2){
+			cpf = line.substr(4);
+		}
+		if(i == 3){
+			endereco = line.substr(9);
+		}
+		if(i == 4){
+			fone = line.substr(5);
+		}
+		if(i!=6){
+			i++;
+		}
+		if(i == 6){
+			Usuario u(nome,cpf,endereco,fone);
+			novoUsuario(u);
+			i = 0;
+		}
+	}
+}
 
